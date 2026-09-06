@@ -15,6 +15,27 @@
 - 云端：`ssh local-win` 即可进入本机
 - 大文件通道可用；跨国场景常走 DERP 中继（见限制）
 
+
+
+## Problems we actually fixed (field-tested)
+
+This repo is not a toy “install Tailscale” note. It documents failures we hit on a real **Windows + Clash Verge airport + cloud Linux** setup, and the fixes that kept both systems working:
+
+| Pain | What breaks | Fix in this repo |
+|---|---|---|
+| Cloud cannot reach home PC without opening ports | Risk / CGNAT | Tailscale mesh + key-only OpenSSH |
+| Windows Administrators ignore user `authorized_keys` | `Permission denied (publickey)` | Use `administrators_authorized_keys` |
+| Broad OpenSSH firewall after install | Port 22 exposed | Allow only `100.64.0.0/10` |
+| Clash `HTTP_PROXY` hijacks Tailscale control plane | `NoState` / flaky login | Bypass + `NO_PROXY` + process DIRECT; heal clears proxy **only for itself** |
+| TUN / global / rule mode churn | Mesh dies when airport mode changes | TUN `route-exclude-address` + Merge prepend-rules |
+| Reboot / bad uninstall | Dual `tailscaled`, service disabled | Delayed-auto service + heal tasks |
+| Expecting LAN speed China↔US cloud | Frustration | Document DERP limits; use Git for bulk sync |
+
+**One-liner:** *Keep your airport. Keep your mesh. Two lanes, zero drama.*
+
+Deep dives: [docs/clash-verge-isolation.md](docs/clash-verge-isolation.md) · [docs/windows-reboot-heal.md](docs/windows-reboot-heal.md)
+
+
 ## Quick Start
 
 ### 前置

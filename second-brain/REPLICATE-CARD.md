@@ -7,3 +7,6 @@
 - **已验证**：SSH 命令、双向小文件、数 MB～数十 MB SCP（中继）。
 - **GitHub**：https://github.com/dll61/cloud-local-tailscale-ssh
 - **下次先想**：要控机 → Tailscale SSH；要狂同步代码/大货 → GitHub。
+
+- **后补坑**：Clash 与 Tailscale 抢控制面 → bypass + Merge DIRECT + 进程级清代理自愈；开机 delayed-auto + heal。
+- **原则**：机场模式随便切；只护 mesh；改动能回滚。

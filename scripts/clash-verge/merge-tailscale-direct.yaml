@@ -1,0 +1,22 @@
+# Paste into Clash Verge profile Merge (enhancement). Airport stays enabled.
+profile:
+  store-selected: true
+
+tun:
+  route-exclude-address:
+    - 100.64.0.0/10
+    - fd7a:115c:a1e0::/48
+
+prepend-rules:
+  - PROCESS-NAME,tailscaled.exe,DIRECT
+  - PROCESS-NAME,Tailscale.exe,DIRECT
+  - PROCESS-NAME,tailscale-ipn.exe,DIRECT
+  - PROCESS-NAME,sshd.exe,DIRECT
+  - PROCESS-NAME,ssh.exe,DIRECT
+  - PROCESS-NAME,scp.exe,DIRECT
+  - PROCESS-NAME,sftp.exe,DIRECT
+  - DOMAIN-SUFFIX,tailscale.com,DIRECT
+  - DOMAIN-SUFFIX,tailscale.io,DIRECT
+  - DOMAIN-SUFFIX,ts.net,DIRECT
+  - IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
+  - IP-CIDR6,fd7a:115c:a1e0::/48,DIRECT,no-resolve
