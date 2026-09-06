@@ -1,0 +1,7 @@
+.env
+*.pem
+id_rsa
+id_ed25519
+*_authkey*
+ts-authkey*
+.DS_Store
